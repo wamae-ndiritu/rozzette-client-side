@@ -78,27 +78,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .categ-con{
-  margin-top: -600px;
+  margin-top: -570px;
   
 }
 
 .show-menu{
-    display: flex;
-    background: rgb(0, 128, 128);
-    height: 600px;
-    width: 60%;
-    justify-content: center;
-    color: #000000;
-    position: absolute;
-    z-index: 6;
-
+  display: none;
 }
 
-.categ{
-  position: sticky;
-  top: 0;
-  width: 100%;
-}
 
 .filter-head-1{
   color: #059bffad;

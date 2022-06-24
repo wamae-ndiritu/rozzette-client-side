@@ -7,6 +7,7 @@ import { getPriceRange, listProduct } from "../../Redux/Actions/ProductActions";
 import Slider from "@mui/material/Slider";
 import { getCategories } from "../../Redux/Actions/categoriesActions";
 import styled from "@emotion/styled";
+import { listSources } from "../../Redux/Actions/sourceActions";
 
 const FilterColor = styled.div`
   width: 20px;
@@ -33,6 +34,9 @@ const ShopSection = (props) => {
   const productList = useSelector((state) => state.productList);
   const { products, page, pages } = productList;
 
+  const sourceList = useSelector((state) => state.sourceList);
+  const { sources } = sourceList;
+
   const listCategories = useSelector((state) => state.listCategories);
   const { loading, error, categories } = listCategories;
 
@@ -58,6 +62,7 @@ const ShopSection = (props) => {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(listSources());
     dispatch(getPriceRange());
   }, [dispatch]);
 
@@ -139,25 +144,16 @@ const ShopSection = (props) => {
                             >
                               All
                             </div>
-                            <div
-                              className="cat-btn"
-                              value="turkey"
-                              onClick={() => handleSource("turkey")}
-                            >
-                              Turkey
-                            </div>
-                            <div
-                              className="cat-btn"
-                              onClick={() => handleSource("china")}
-                            >
-                              China
-                            </div>
-                            <div
-                              className="cat-btn"
-                              onClick={() => handleSource("dubai")}
-                            >
-                              Dubai
-                            </div>
+                            {sources?.map((source) => (
+                              <div
+                                className="cat-btn"
+                                value={source.name}
+                                key={source._id}
+                                onClick={() => handleSource(`${source.name}`)}
+                              >
+                                {source.name}
+                              </div>
+                            ))}
                           </div>
                         </section>
                         <div className="mb-4">
@@ -366,25 +362,16 @@ const ShopSection = (props) => {
                               >
                                 All
                               </div>
-                              <div
-                                className="cat-btn"
-                                value="turkey"
-                                onClick={() => handleSource("turkey")}
-                              >
-                                Turkey
-                              </div>
-                              <div
-                                className="cat-btn"
-                                onClick={() => handleSource("china")}
-                              >
-                                China
-                              </div>
-                              <div
-                                className="cat-btn"
-                                onClick={() => handleSource("dubai")}
-                              >
-                                Dubai
-                              </div>
+                              {sources?.map((source) => (
+                                <div
+                                  className="cat-btn"
+                                  value={source.name}
+                                  key={source._id}
+                                  onClick={() => handleSource(`${source.name}`)}
+                                >
+                                  {source.name}
+                                </div>
+                              ))}
                             </div>
                           </section>
                         </div>

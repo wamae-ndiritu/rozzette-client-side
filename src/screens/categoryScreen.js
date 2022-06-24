@@ -12,6 +12,8 @@ import {
 } from "../Redux/Actions/ProductActions";
 import Pagination from "../components/homeComponents/pagination";
 
+import { listSources } from "../Redux/Actions/sourceActions";
+
 const FilterColor = styled.div`
   width: 20px;
   height: 20px;
@@ -36,6 +38,9 @@ const CategoryScreen = ({ match }) => {
   const priceRange = useSelector((state) => state.priceRange);
   const { minPrice, maxPrice } = priceRange;
 
+  const sourceList = useSelector((state) => state.sourceList);
+  const { sources } = sourceList;
+
   const valuetext = (value) => {
     return `Ksh ${price}`;
   };
@@ -54,6 +59,7 @@ const CategoryScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(getPriceRange());
+    dispatch(listSources());
   }, [dispatch]);
 
   useEffect(() => {
@@ -89,26 +95,19 @@ const CategoryScreen = ({ match }) => {
                 <h5 className="filter-head">Sources</h5>
               </div>
               <div className="category-btn ">
-                <div
-                  className="cat-btn"
-                  value="turkey"
-                  onClick={() => handleSource("")}
-                >
+                <div className="cat-btn" onClick={() => handleSource("")}>
                   All
                 </div>
-                <div
-                  className="cat-btn"
-                  value="turkey"
-                  onClick={() => handleSource("turkey")}
-                >
-                  Turkey
-                </div>
-                <div className="cat-btn" onClick={() => handleSource("china")}>
-                  China
-                </div>
-                <div className="cat-btn" onClick={() => handleSource("dubai")}>
-                  Dubai
-                </div>
+                {sources?.map((source) => (
+                  <div
+                    className="cat-btn"
+                    value={source.name}
+                    key={source._id}
+                    onClick={() => handleSource(`${source.name}`)}
+                  >
+                    {source.name}
+                  </div>
+                ))}
               </div>
             </section>
             <div className="mb-4">
@@ -262,32 +261,19 @@ const CategoryScreen = ({ match }) => {
                   <h5 className="filter-head">Sources</h5>
                 </div>
                 <div className="category-btn ">
-                  <div
-                    className="cat-btn"
-                    value="turkey"
-                    onClick={() => handleSource("")}
-                  >
+                  <div className="cat-btn" onClick={() => handleSource("")}>
                     All
                   </div>
-                  <div
-                    className="cat-btn"
-                    value="turkey"
-                    onClick={() => handleSource("turkey")}
-                  >
-                    Turkey
-                  </div>
-                  <div
-                    className="cat-btn"
-                    onClick={() => handleSource("china")}
-                  >
-                    China
-                  </div>
-                  <div
-                    className="cat-btn"
-                    onClick={() => handleSource("dubai")}
-                  >
-                    Dubai
-                  </div>
+                  {sources?.map((source) => (
+                    <div
+                      className="cat-btn"
+                      value={source.name}
+                      key={source._id}
+                      onClick={() => handleSource(`${source.name}`)}
+                    >
+                      {source.name}
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>

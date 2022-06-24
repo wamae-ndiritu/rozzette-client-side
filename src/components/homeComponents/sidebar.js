@@ -12,7 +12,7 @@ const CategorySideBar = () => {
 
   return (
     <>
-      <div className="container categ-con show-menu" id="offcanvas_aside">
+      <div className="container categ-con" id="offcanvas_aside">
         <div className="categ">
           <div className="d-flex justify-content-center">
             <p className="filter-head-1">Categories</p>

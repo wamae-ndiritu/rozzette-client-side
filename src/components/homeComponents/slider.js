@@ -4,8 +4,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../../data/sliderData";
 
-console.log(sliderItems);
-
 const Container = styled.div`
   width: 93%;
   margin: 30px auto;

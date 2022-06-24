@@ -28,6 +28,7 @@ import {
   makeOrderIsPaidReducer,
 } from "./Reducers/paymentReducers";
 import { listCategoriesReducer } from "./Reducers/categoryReducer";
+import { listSourcesReducer } from "./Reducers/sourceReducer";
 import { mailSubscriberReducer } from "./Reducers/mailReducers";
 
 const reducer = combineReducers({
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   mailSubscriber: mailSubscriberReducer,
   categoryProducts: listCategoryProducts,
   priceRange: priceRangeReducer,
+  sourceList: listSourcesReducer,
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")

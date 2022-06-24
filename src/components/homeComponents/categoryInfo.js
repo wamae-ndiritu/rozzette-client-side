@@ -4,11 +4,7 @@ import { Link } from "react-router-dom";
 
 const CategoryInfo = () => {
   const listCategories = useSelector((state) => state.listCategories);
-  const { loading, error, categories } = listCategories;
-
-  if (!loading && !error) {
-    console.log(categories);
-  }
+  const { categories } = listCategories;
 
   return (
     <>
