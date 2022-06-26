@@ -38,7 +38,7 @@ const Orders = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((order) => (
+                  {orders?.map((order) => (
                     <tr
                       className={`${
                         order.isPaid ? "alert-success" : "alert-danger"
@@ -56,7 +56,7 @@ const Orders = (props) => {
                           ? moment(order.paidAt).calendar()
                           : moment(order.createdAt).calendar()}
                       </td>
-                      <td>${order.totalPrice}</td>
+                      <td>Ksh {order.totalPrice}</td>
                     </tr>
                   ))}
                 </tbody>

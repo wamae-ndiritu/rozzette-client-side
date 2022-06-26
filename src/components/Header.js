@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import $ from "jquery";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -128,14 +128,6 @@ const Header = () => {
                         search
                       </button>
                     </form>
-                  </div>
-                  <div className="menu-icon">
-                    <button
-                      className="btn btn-icon btn-mobile me-auto"
-                      data-trigger="#offcanvas_aside"
-                    >
-                      <i className="md-28 fas fa-bars"></i>
-                    </button>
                   </div>
                 </div>
               </div>

@@ -1,17 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import Message from "./../components/LoadingError/Error";
 import mpesa from "../Images/mpesa-log.jpg";
+import { createOrder } from "../Redux/Actions/OrderActions";
+import { getSettings } from "../Redux/Actions/settingsActions";
+import { ORDER_CREATE_RESET } from "../Redux/Constants/OrderConstants";
+import Loading from "./../components/LoadingError/Loading";
 
 const PlaceOrderScreen = ({ history }) => {
   window.scrollTo(0, 0);
 
+  const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { loading, error, order, success } = orderCreate;
+
+  const settingsList = useSelector((state) => state.settingsList);
+  const { settings } = settingsList;
 
   // Calculate Price
   const addDecimals = (num) => {
@@ -21,8 +33,8 @@ const PlaceOrderScreen = ({ history }) => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
-  cart.shippingPrice = addDecimals(cart.itemsPrice < 100 ? 0 : 100);
-  cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
+  cart.shippingPrice = addDecimals(cart.itemsPrice && 0);
+  cart.taxPrice = addDecimals(Number((0.0 * cart.itemsPrice).toFixed(2)));
   cart.totalPrice = (
     Number(cart.itemsPrice) +
     Number(cart.shippingPrice) +
@@ -32,6 +44,40 @@ const PlaceOrderScreen = ({ history }) => {
 
   const placeOrderHandler = () => {
     history.push("/payments/lipa-na-mpesa");
+  };
+
+  useEffect(() => {
+    dispatch(getSettings());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order?._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [history, dispatch, order?._id, success]);
+
+  const orderItems = cart.cartItems;
+  const shippingAddress = cart.shippingAddress;
+  const paymentMethod = cart.paymentMethod;
+  const itemsPrice = cart.itemsPrice;
+  const shippingPrice = cart.shippingPrice;
+  const taxPrice = cart.taxPrice;
+  const totalPrice = amountPayable;
+
+  const placeUnPaidOrder = (e) => {
+    e.preventDefault();
+    dispatch(
+      createOrder({
+        orderItems,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
+      })
+    );
   };
 
   return (
@@ -99,6 +145,11 @@ const PlaceOrderScreen = ({ history }) => {
         </div>
 
         <div className="row order-products justify-content-between">
+          {loading ? (
+            <Loading />
+          ) : (
+            error && <Message variant="alert-danger">{error}</Message>
+          )}
           <div className="col-lg-8">
             {cart.cartItems.length === 0 ? (
               <Message variant="alert-info mt-5">Your cart is empty</Message>
@@ -144,7 +195,11 @@ const PlaceOrderScreen = ({ history }) => {
             )}
           </div>
           {/* total */}
-          <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
+          <div className="col-lg-3 d-flex align-items-end flex-column subtotal-order">
+            <Message variant="alert-info mt-5">
+              !Please note that charges such as shipping and delivery fee may be
+              payable once the goods have been shipped.
+            </Message>
             <table className="table table-bordered">
               <tbody>
                 <tr>
@@ -173,7 +228,17 @@ const PlaceOrderScreen = ({ history }) => {
                 </tr>
               </tbody>
             </table>
-            {cart.cartItems.length === 0 ? null : (
+            {!settings?.status ? (
+              cart.cartItems.length === 0 ? null : (
+                <button
+                  type="submit"
+                  onClick={placeUnPaidOrder}
+                  style={{ marginBottom: "2px" }}
+                >
+                  Place Order
+                </button>
+              )
+            ) : cart.cartItems.length === 0 ? null : (
               <button type="submit" onClick={placeOrderHandler}>
                 Pay Ksh {amountPayable}
               </button>

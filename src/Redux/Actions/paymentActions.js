@@ -20,7 +20,6 @@ export const verifyMpesaCode =
         { mpesaCode, amountPayable }
       );
       //console.log(mpesaReceiptNumber);
-      console.log(data);
       dispatch({ type: PAYMENT_VERIFICATION_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -41,8 +40,6 @@ export const makeOrderIsPaid = (id) => async (dispatch) => {
     const { data } = await axios.put(
       `${URL}/api/verify-payment/${id}/orderIsPaid`
     );
-    console.log(data);
-    console.log("Order Id is", id);
     dispatch({ type: MAKE_ORDER_ISPAID_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

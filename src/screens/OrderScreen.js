@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails } from "../Redux/Actions/OrderActions";
 import Loading from "./../components/LoadingError/Loading";
 import Message from "./../components/LoadingError/Error";
+import mpesa from "../Images/mpesa-log.jpg";
 import moment from "moment";
 import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
 
@@ -23,17 +24,18 @@ const OrderScreen = ({ match }) => {
     };
 
     order.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+      order?.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
 
   useEffect(() => {
-    if(!order){
-      dispatch({type: ORDER_PAY_RESET});
+    if (!order) {
+      dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
     }
-
   }, [dispatch, orderId, order]);
+
+  console.log(order?.orderItems);
 
   return (
     <>
@@ -79,7 +81,10 @@ const OrderScreen = ({ match }) => {
                       <strong>Order info</strong>
                     </h5>
                     <p>Shipping: {order.shippingAddress.country}</p>
-                    <p>Pay method: {order.paymentMethod}</p>
+                    <p>Payment:</p>{" "}
+                    {order.paymentMethod === "Lipa Na Mpesa" && (
+                      <img src={mpesa} alt="" style={{ marginBottom: "4px" }} />
+                    )}
                     {order.isPaid ? (
                       <div className="bg-info p-2 col-12">
                         <p className="text-white text-center text-sm-start">
@@ -87,11 +92,24 @@ const OrderScreen = ({ match }) => {
                         </p>
                       </div>
                     ) : (
-                      <div className="bg-danger p-2 col-12">
-                        <p className="text-white text-center text-sm-start">
-                          Not Paid
-                        </p>
-                      </div>
+                      <>
+                        <div
+                          className="bg-danger p-2 col-12 d-flex justify-content-center"
+                          style={{ marginTop: "10px" }}
+                        >
+                          <p className="text-white text-center text-sm-start">
+                            Till NO:{" "}
+                            <span
+                              style={{
+                                color: "black",
+                                fontSize: "18px",
+                              }}
+                            >
+                              5882195
+                            </span>
+                          </p>
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
@@ -139,15 +157,40 @@ const OrderScreen = ({ match }) => {
                   </Message>
                 ) : (
                   <>
+                    {!order.isPaid && (
+                      <Message variant="alert-info mt-5">
+                        !Please note that once you have made your payment
+                        through mpesa, our systems will only update once your
+                        order has been delivered or collected.
+                      </Message>
+                    )}
                     {order.orderItems.map((item, index) => (
                       <div className="order-product row" key={index}>
                         <div className="col-md-3 col-6">
                           <img src={item.image} alt={item.productName} />
                         </div>
-                        <div className="col-md-5 col-6 d-flex align-items-center">
-                          <Link to={`/products/${item.product}`}>
+                        <div
+                          className="col-md-5 col-6 d-flex align-items-center"
+                          style={{ flexDirection: "column" }}
+                        >
+                          <Link
+                            to={`/products/${item.product}`}
+                            className="mb-2"
+                          >
                             <h6>{item.productName}</h6>
                           </Link>
+                          <div className="d-flex justify-content-center align-items-center">
+                            Size {item.size}
+                            <div
+                              style={{
+                                background: `${item.color}`,
+                                marginLeft: "5px",
+                                height: "20px",
+                                width: "20px",
+                                borderRadius: "50%",
+                              }}
+                            ></div>
+                          </div>
                         </div>
                         <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
                           <h4>QUANTITY</h4>
@@ -155,7 +198,7 @@ const OrderScreen = ({ match }) => {
                         </div>
                         <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                           <h4>SUBTOTAL</h4>
-                          <h6>${item.qty * item.price}</h6>
+                          <h6>Ksh {item.qty * item.price}</h6>
                         </div>
                       </div>
                     ))}
@@ -170,28 +213,44 @@ const OrderScreen = ({ match }) => {
                       <td>
                         <strong>Products</strong>
                       </td>
-                      <td>${order.itemsPrice}</td>
+                      <td>Ksh {order.itemsPrice}</td>
                     </tr>
                     <tr>
                       <td>
                         <strong>Shipping</strong>
                       </td>
-                      <td>${order.shippingPrice}</td>
+                      <td>Ksh {order.shippingPrice}</td>
                     </tr>
                     <tr>
                       <td>
                         <strong>Tax</strong>
                       </td>
-                      <td>${order.taxPrice}</td>
+                      <td>Ksh {order.taxPrice}</td>
                     </tr>
                     <tr>
                       <td>
                         <strong>Total</strong>
                       </td>
-                      <td>${order.totalPrice}</td>
+                      <td>Ksh {order.totalPrice}</td>
                     </tr>
                   </tbody>
                 </table>
+                <div
+                  className="bg-danger p-2 col-12 d-flex justify-content-center"
+                  style={{ marginTop: "5px", marginBottom: "10px" }}
+                >
+                  <p className="text-white text-center text-sm-start">
+                    Pay Order{" "}
+                    <span
+                      style={{
+                        color: "black",
+                        fontSize: "18px",
+                      }}
+                    >
+                      Ksh {order.totalPrice}
+                    </span>
+                  </p>
+                </div>
                 {/*!order.isPaid && (
                   <div className="col-12">
                     {loadingPay && <Loading />}
@@ -210,7 +269,7 @@ const OrderScreen = ({ match }) => {
           </>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -30,6 +30,7 @@ import {
 import { listCategoriesReducer } from "./Reducers/categoryReducer";
 import { listSourcesReducer } from "./Reducers/sourceReducer";
 import { mailSubscriberReducer } from "./Reducers/mailReducers";
+import { settingsListReducer } from "./Reducers/settingsReducer";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   categoryProducts: listCategoryProducts,
   priceRange: priceRangeReducer,
   sourceList: listSourcesReducer,
+  settingsList: settingsListReducer,
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")

@@ -65,7 +65,7 @@ const LipaNaMpesaScreen = ({ history }) => {
           <div className="mpesa-col-2">
             <div className="payment-info">
               <p>
-                A prompt will on your phone requesting you to enter your mpesa
+                A prompt will be sent on your phone requesting you to enter your mpesa
                 pin. <br /> Enter your pin and click okay to pay.
               </p>
             </div>
