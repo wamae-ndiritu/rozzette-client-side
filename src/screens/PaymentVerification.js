@@ -12,6 +12,12 @@ import {
 import { ORDER_CREATE_RESET } from "../Redux/Constants/OrderConstants";
 
 const PaymentVericationScreen = ({ history }) => {
+
+  const title = "Payment Verification";
+    useEffect(() => {
+      document.title = `Rozzette | ${title}`;
+    }, []);
+
   const [mpesaCode, setMpesaCode] = useState("");
   const dispatch = useDispatch();
 

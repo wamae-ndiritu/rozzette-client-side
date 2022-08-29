@@ -81,7 +81,12 @@ const SingleProduct = ({ history, match }) => {
     image.src = colorImage;
   };
 
-  console.log();
+  const title = "Product Details";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
+
+  // console.log();
   return (
     <>
       <Header />

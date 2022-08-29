@@ -21,7 +21,7 @@ import { logout } from "./userActions";
 
 // PRODUCT LIST
 export const listProduct =
-  (keyword = "", pageNumber = " ", price, cat = "", color = "", source = "") =>
+  (keyword = "", pageNumber = "", price, cat = "", color = "", source = "") =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
@@ -33,7 +33,6 @@ export const listProduct =
         `${URL}/api/products?keyword=${keyword}&pageNumber=${pageNumber}&minPrice=${minPrice}&maxPrice=${maxPrice}&cat=${cat}&color=${color}&source=${source}`
       );
 
-      console.log(data);
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -67,9 +66,8 @@ export const getPriceRange = () => async (dispatch) => {
 };
 
 // LIST CATEGORY PRODUCTS
-
 export const listCategoryProducts =
-  (categoryName = "", price, source = "", color = "") =>
+  (categoryName, pageNumber, price, color, source, otherCat) =>
   async (dispatch) => {
     try {
       dispatch({ type: CATEGORY_PRODUCTS_REQUEST });
@@ -78,7 +76,7 @@ export const listCategoryProducts =
       const maxPrice = Number(price[1]);
 
       const { data } = await axios.get(
-        `${URL}/api/products/category/products?cat=${categoryName}&minPrice=${minPrice}&maxPrice=${maxPrice}&source=${source}&color=${color}`
+        `${URL}/api/products/category/products?cat=${categoryName}&pageNumber=${pageNumber}&minPrice=${minPrice}&maxPrice=${maxPrice}&source=${source}&color=${color}&otherCat=${otherCat}`
       );
 
       dispatch({ type: CATEGORY_PRODUCTS_SUCCESS, payload: data });

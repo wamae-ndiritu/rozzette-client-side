@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import Email from "@mui/icons-material/Email";
 
 const Footer = () => {
@@ -39,17 +38,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <FacebookIcon style={{ color: "blue", fontSize: "22px" }} />
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <InstagramIcon
-                  style={{
-                    color: "purple",
-                    fontSize: "22px",
-                  }}
-                />
+                <FacebookIcon style={{ color: "#fff", fontSize: "22px" }} />
               </a>
             </li>
             <li>
@@ -71,7 +60,7 @@ const Footer = () => {
                 <Email
                   style={{
                     fontSize: "22px",
-                    color: "#000000",
+                    color: "#fff",
                   }}
                 />
               </a>

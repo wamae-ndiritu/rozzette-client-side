@@ -80,10 +80,15 @@ const PlaceOrderScreen = ({ history }) => {
     );
   };
 
+  const title = "Place Order";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
+
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="container mt-4">
         <div className="row  order-detail">
           <div className="col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0">
             <div className="row ">

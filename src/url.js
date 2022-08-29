@@ -1,1 +1,1 @@
-export const URL = "https://rozzette-server.herokuapp.com";
+export const URL = "http://localhost:5000";

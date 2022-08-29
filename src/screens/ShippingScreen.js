@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -20,17 +20,21 @@ const ShippingScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, county, country }));
+    dispatch(
+      saveShippingAddress({ address, city, postalCode, county, country })
+    );
     history.push("/payment");
   };
+
+  const title = "Billing Details";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
   return (
     <>
       <Header />
       <div className="container d-flex justify-content-center align-items-center login-center">
-        <form
-          className="Login col-md-8 col-lg-4 col-11"
-          onSubmit={submitHandler}
-        >
+        <form className="Login col-md-8 col-lg-8 " onSubmit={submitHandler}>
           <h6>DELIVERY ADDRESS</h6>
           <input
             type="text"
@@ -70,7 +74,7 @@ const ShippingScreen = ({ history }) => {
           <button type="submit">Continue</button>
         </form>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

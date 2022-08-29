@@ -23,6 +23,11 @@ const ProfileScreen = () => {
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
 
+  const title = "Customer's Profile";
+    useEffect(() => {
+      document.title = `Rozzette | ${title}`;
+    }, []);
+
   return (
     <>
       <Header />

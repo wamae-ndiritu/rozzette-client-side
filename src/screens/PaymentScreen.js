@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../Redux/Actions/cartActions";
 import Header from "./../components/Header";
@@ -24,14 +24,16 @@ const PaymentScreen = ({ history }) => {
     dispatch(savePaymentMethod(paymentMethod));
     history.push("/placeorder");
   };
+
+  const title = "Payment Methods";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
   return (
     <>
       <Header />
       <div className="container d-flex justify-content-center align-items-center login-center cent">
-        <form
-          className="Login2 col-md-8 col-lg-4 col-11"
-          onSubmit={submitHandler}
-        >
+        <form className="Login2 col-md-8 col-lg-6" onSubmit={submitHandler}>
           <h6>SELECT PAYMENT METHOD</h6>
           <div className="payment-container">
             <div className="radio-container">

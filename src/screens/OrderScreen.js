@@ -35,12 +35,16 @@ const OrderScreen = ({ match }) => {
     }
   }, [dispatch, orderId, order]);
 
-  console.log(order?.orderItems);
+  // console.log(order?.orderItems);
+  const title = "Your Order";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
 
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="container mt-4">
         {loading ? (
           <Loading />
         ) : error ? (

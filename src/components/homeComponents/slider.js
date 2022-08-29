@@ -1,121 +1,105 @@
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { useState } from "react";
-import styled from "styled-components";
-import { sliderItems } from "../../data/sliderData";
-
-const Container = styled.div`
-  width: 93%;
-  margin: 30px auto;
-  height: 50vh;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: teal;
-`;
-
-const Arrow = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: #fff7f7;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: ${(props) => props.direction === "left" && "10px"};
-  right: ${(props) => props.direction === "right" && "10px"};
-  margin: auto;
-  cursor: pointer;
-  opacity: 0.5;
-  z-index: 2;
-`;
-
-const Wrapper = styled.div`
-  height: 100%;
-  display: flex;
-  transition: all 1.5s ease;
-  transform: translateX(${(props) => props.slideIndex * -92}vw);
-`;
-
-const Slide = styled.div`
-  width: 92vw;
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  background-color: #${(props) => props.bg};
-`;
-
-const ImgContainer = styled.div`
-  height: 100%;
-  flex: 2;
-`;
-
-const Image = styled.img`
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-`;
-
-const InfoContainer = styled.div`
-  flex: 1;
-  padding: 50px;
-`;
-
-const Title = styled.h1`
-  font-size: 70px;
-`;
-
-const Desc = styled.p`
-  margin: 50px 0px;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 3px;
-`;
-
-const Button = styled.button`
-  padding: 10px;
-  font-size: 20px;
-  background-color: transparent;
-  cursor: pointer;
-`;
+import React from "react";
+import banner1 from "../../Images/banner-1.jpg";
+import { data } from "../../data/exclusiveProducts";
 
 const Slider = () => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const handleClick = (direction) => {
-    if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 6);
-    } else {
-      setSlideIndex(slideIndex < 6 ? slideIndex + 1 : 0);
-    }
-  };
-
   return (
-    <Container>
-      <Arrow direction="left" onClick={() => handleClick("left")}>
-        <ChevronLeftIcon />
-      </Arrow>
-      <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
-          <Slide key={item._id}>
-            <ImgContainer>
-              <Image src={item.image} />
-            </ImgContainer>
-            <InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
-            </InfoContainer>
-          </Slide>
-        ))}
-      </Wrapper>
-      <Arrow direction="right" onClick={() => handleClick("right")}>
-        <ChevronRightIcon />
-      </Arrow>
-    </Container>
+    <section className="container mb-4">
+      <div className="carousel-wrapper">
+        <div
+          id="carouselExampleDark"
+          className="carousel carousel-dark slide"
+          data-bs-ride="carousel"
+        >
+          <div className="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="0"
+              className="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
+          <div className="carousel-inner">
+            <div className="carousel-item active" data-bs-interval="5000">
+              <img src={banner1} className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item" data-bs-interval="10000">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/rozzette-store.appspot.com/o/1655904570569pexels-tembela-bohle-1884579.jpg?alt=media&token=0e8b18b1-51f9-4b3b-a589-669b76bfbf2f"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item" data-bs-interval="3000">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/rozzette-store.appspot.com/o/1655904516833pexels-terje-sollie-298863.jpg?alt=media&token=90d96c80-6131-4066-94a2-f751f213ec71"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div className="featured-products">
+          <div className="shadow-lg mx-3 my-4 heading-bar">
+            <p className="text-center ">Exclusive Shopping</p>
+          </div>
+          <div className="row d-flex justify-content-center mx-5">
+            {data.map((product) => {
+              const { id, name, image } = product;
+              return (
+                <div
+                  className="col-4 p-2 d-flex justify-content-center flex-column"
+                  key={id}
+                >
+                  <div className="excl-image">
+                    <img src={image} alt={name} />
+                  </div>
+                  <p>{name}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

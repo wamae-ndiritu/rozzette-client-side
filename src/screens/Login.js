@@ -41,6 +41,11 @@ const Login = ({ location, history }) => {
     dispatch(login(email, password));
   };
 
+  const title = "Login";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
+
   return (
     <>
       <Header />

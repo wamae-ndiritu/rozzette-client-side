@@ -1,3 +1,5 @@
+
+
 @media (max-width: 991.98px) {
   .display-none {
     display: none !important;
@@ -57,6 +59,12 @@
   .laptop-mode{
     display: flex;
   }
+}
+
+@media (min-width: 768px){
+  /* .filt-product-height{
+    height: 200px !important;
+  } */
 }
 @media (max-width: 768px) {
   .pc-header {
@@ -166,10 +174,6 @@
   .shop-section-big-screen {
     display: none;
   }
-
-  .search-fragment-cont {
-    display: none;
-  }
     
   .shop-section-mobile-1 {
      display: flex;
@@ -191,12 +195,6 @@
     
   .section {
     margin: 0;
-  }
-
-  .search-fragment-cont-mobile {
-    display: flex;
-    flex-direction: column;
-          
   }
           
   .mobile-filtered-prod {
@@ -255,6 +253,60 @@
   background: teal;
 }
 
+.title-small {
+  font-size: .7rem;
+}
+
+
+.headers-small{
+  font-size: .9rem !important;
+}
+
+.carousel-wrapper{
+  flex-direction: column;
+}
+
+.carousel{
+  flex: 1;
+  margin-bottom: 10px;
+}
+.featured-products{
+margin-bottom: 10px;
+height: 30vh;
+}
+.carousel-wrapper{
+  height: 120vh;
+}
+
+.foto-img{
+  width: 50px;
+}
+
+.search-fragment-cont{
+  flex-direction: column;
+  margin: 20px 0 !important;
+}
+
+.filters-cont{
+  margin-bottom: 20px;
+  height: 20px;
+}
+
+.cart-text, .cart-price{
+  margin-left: 10px;
+}
+
+.cart-text h4{
+  font-weight: 100 !important;
+  font-size: 10px;
+}
+
+}
+
+@media (min-width: 576px){
+  .border-product{
+    padding: 10px;
+  }
 }
 @media (max-width: 400px) {
   .subscribe-head h2 {
@@ -264,14 +316,6 @@
   .single-image,
   .single-image img {
     height: 200px;
-  }
-
-  .shop-section-big-screen{
-    display: none;
-  }
-
-  .search-fragment-cont{
-    display: none;
   }
 
   .shop-section-mobile-1{
@@ -295,12 +339,7 @@
       margin: 0;
   }
 
-  .search-fragment-cont-mobile {
-    display: flex;
-    flex-direction: column;
 
-  }
-  
   .mobile-filtered-prod{
     display: flex;
     flex-wrap: wrap;
@@ -378,6 +417,27 @@
     width: 300px;
   }
 
+  .filter-sect-cont{
+    max-width: 100px;
+  }
+
+  .filters{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .slider-size{
+    width: 100%;
+  }
+
+  .filters-shadow{
+    height: auto;
+  }
+
+  .navbar-brand h1{
+    font-size: 1.6rem;
+  }
 }
 
 
@@ -421,3 +481,4 @@
     margin: 5px;
   }
 }
+

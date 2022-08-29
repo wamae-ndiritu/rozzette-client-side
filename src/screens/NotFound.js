@@ -1,8 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import Header from "./../components/Header";
 
 const NotFound = () => {
+  const title = "Error";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
+
   return (
     <>
       <Header />

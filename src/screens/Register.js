@@ -30,6 +30,11 @@ const Register = ({ location, history }) => {
     dispatch(register(name, email, password));
   };
 
+  const title = "Sign Up";
+    useEffect(() => {
+      document.title = `Rozzette | ${title}`;
+    }, []);
+
   return (
     <>
       <Header />

@@ -21,25 +21,38 @@ import PrivateRouter from "./PrivateRouter";
 import EmailVerificationScreen from "./screens/emailVerifySreen";
 import CongratNote from "./screens/congratScreen";
 import CategoryScreen from "./screens/categoryScreen";
+// import CategoryScreen from "./screens/categoryScreen";
+import ShopPage from "./screens/ShopPage";
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route path="/" component={HomeScreen} exact />
-        <Route path="/search/:keyword" component={HomeScreen} exact />
+        <Route path="/search/:keyword" component={ShopPage} exact />
         <Route path="/search/:keyword/:category" component={HomeScreen} exact />
         <Route path="/page/:pagenumber" component={HomeScreen} exact />
         <Route path="/subsribe/" component={CongratNote} exact />
         <Route
           path="/search/:keyword/:category/page/:pageNumber"
-          component={HomeScreen}
+          component={ShopPage}
+          exact
+        />
+        <Route
+          path="/search/:keyword/page/:pageNumber"
+          component={ShopPage}
           exact
         />
         <Route path="/products/:id" component={SingleProduct} exact />
         <Route
           path="/products/category/:categoryName"
           component={CategoryScreen}
+          exact
+        />
+        <Route
+          path="/products/category/:categoryName/page/:pageNumber"
+          component={CategoryScreen}
+          exact
         />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} exact />

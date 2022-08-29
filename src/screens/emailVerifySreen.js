@@ -21,6 +21,11 @@ const EmailVerificationScreen = ({ history }) => {
     }
   }, [history, userInfo]);
 
+  const title = "Login";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = status && status._id;

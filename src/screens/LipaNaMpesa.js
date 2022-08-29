@@ -49,6 +49,11 @@ const LipaNaMpesaScreen = ({ history }) => {
     }
   }, [history, success]);
 
+  const title = "Payments";
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
+
   return (
     <>
       <Header />
@@ -65,8 +70,8 @@ const LipaNaMpesaScreen = ({ history }) => {
           <div className="mpesa-col-2">
             <div className="payment-info">
               <p>
-                A prompt will be sent on your phone requesting you to enter your mpesa
-                pin. <br /> Enter your pin and click okay to pay.
+                A prompt will be sent on your phone requesting you to enter your
+                mpesa pin. <br /> Enter your pin and click okay to pay.
               </p>
             </div>
             <form className="mpesa-container col-md-8 col-lg-4 col-11">
