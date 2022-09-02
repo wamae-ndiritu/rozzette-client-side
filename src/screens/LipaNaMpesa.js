@@ -5,6 +5,7 @@ import Footer from "./../components/Footer";
 import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import { payOrder } from "../Redux/Actions/OrderActions";
+import mpesa from "../Images/mpesa-log.jpg";
 
 const LipaNaMpesaScreen = ({ history }) => {
   window.scrollTo(0, 0);
@@ -57,36 +58,47 @@ const LipaNaMpesaScreen = ({ history }) => {
   return (
     <>
       <Header />
-      <div className="payment-container">
-        {loading ? (
-          <Loading />
-        ) : (
-          error && <Message variant="alert-danger">{error}</Message>
-        )}
-        <div className="payment-wrapper alert-success">
-          <div className="mpesa-col-1">
+      <div className="container mt-5 mb-4 d-flex justify-content-center">
+        <div className="col-md-6 col-lg-6 col-12 shadow-lg">
+          {loading ? (
+            <Loading />
+          ) : (
+            error && (
+              <div className="d-flex justify-content-center mt-3">
+                <Message variant="alert-danger" className="col-4">
+                  {error}
+                </Message>
+              </div>
+            )
+          )}
+          <div className="text-center my-3 mpesa-page-title">
             <h6>Make Payment</h6>
           </div>
-          <div className="mpesa-col-2">
-            <div className="payment-info">
-              <p>
+          <div className="row mb-4 mx-3">
+            <div className="col-6">
+              <p className="gray-para">
                 A prompt will be sent on your phone requesting you to enter your
-                mpesa pin. <br /> Enter your pin and click okay to pay.
+                mpesa pin.
+              </p>
+              <p className="gray-para">Enter your pin and click okay to pay.</p>
+              <p className="gray-para">
+                Wait for the confirmation message and proceed to verifying your
+                payment.
               </p>
             </div>
-            <form className="mpesa-container col-md-8 col-lg-4 col-11">
+            <form className="col-6 mpesa-form">
               <div className="mpesa-title">
-                <h6>Lipa Na Mpesa</h6>
+                <img src={mpesa} alt="mpesa" />
               </div>
               <div className="mpesa-input">
-                <label>Mpesa No:</label>
+                <label>ENTER MOBILE NO</label>
                 <input
                   type="number"
                   onChange={(e) => setPhoneNo(e.target.value)}
                   placeholder="254712345678"
                 />
               </div>
-              <div className="mpesa-input">Amount: Ksh {amountPayable}</div>
+              <p>Amount: Ksh {amountPayable}</p>
               <div className="mpesa-input">
                 <button
                   type="submit"

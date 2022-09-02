@@ -19,14 +19,12 @@ const ContactInfo = () => {
             <div className="info-image">
               <i className="fas fa-map-marker-alt"></i>
             </div>
-            <h5>Nairobi</h5>
-            <p>Pick Up Shop</p>
+            <h5>Pick Up Shop</h5>
             <p>Ebrahim Shopping Mall,</p>
-            <p>Along Moi Avenue,</p>
             <p>
-              2<sup>nd</sup> Floor,
+              2<sup>nd</sup> Floor, Shop K8
             </p>
-            <p>Shop K8</p>
+            <p>Along Moi Avenue, Nairobi</p>
           </div>
         </div>
         <div className="col-12 col-md-4 contact-Box">
@@ -39,8 +37,9 @@ const ContactInfo = () => {
               />
             </div>
             <h5>Pay Method</h5>
-            <p>Mpesa</p>
-            <p>Till No: 5882195</p>
+            <p>
+              Mpesa Till No <span style={{ color: "red" }}>5882195</span>
+            </p>
           </div>
         </div>
       </div>

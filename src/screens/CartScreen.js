@@ -63,22 +63,20 @@ const CartScreen = ({ match, location, history }) => {
     dispatch(removefromcart(id));
   };
 
-  console.log(quantity);
-
-  // useEffect(() => {
-  //   dispatch(addToCart(item.product, quantity));
-  // }, []);
-
   return (
     <>
       <Header />
       {/* Cart */}
       <div className="container cart-container shadow-sm">
         {cartItems.length === 0 ? (
-          <div className=" alert alert-info text-center empty-cart">
-            Your cart is empty
+          <div className="d-flex flex-column justify-content-center alert alert-info text-center empty-cart">
+            <p className="text-danger my-3">Oops! your cart is empty</p>
+            <i
+              className="fa fa-shopping-cart mb-3"
+              style={{ color: "#222", fontSize: "54px" }}
+            ></i>
             <Link
-              className="btn btn-success mx-5 px-5 py-3"
+              className="btn btn-search mx-5 px-5 py-3 mb-3"
               to="/"
               style={{
                 fontSize: "12px",
@@ -176,7 +174,9 @@ const CartScreen = ({ match, location, history }) => {
               </Link>
               {total > 0 && (
                 <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                  <button onClick={checkOutHandler}>Checkout</button>
+                  <button onClick={checkOutHandler}>
+                    Checkout
+                  </button>
                 </div>
               )}
             </div>

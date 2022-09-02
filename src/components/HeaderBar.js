@@ -1,10 +1,10 @@
 import React from "react";
 
-const HeaderBar = () => {
+const HeaderBar = ({ barTitle }) => {
   return (
-    <div className="container mb-4">
-      <div className="header-bar">
-        <p className="px-3">SHOP BY CATEGORY</p>
+    <div className="container mb-3">
+      <div className="header-bar shadow-lg">
+        <p className="px-3">{barTitle}</p>
       </div>
     </div>
   );

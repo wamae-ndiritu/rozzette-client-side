@@ -13,11 +13,7 @@
   .btn-group button {
     font-size: 13px;
   }
-  .badge {
-    top: -10px;
-    padding: 5px;
-    font-size: 7px;
-  }
+  
   .input-group {
     height: 30px;
   }
@@ -67,12 +63,6 @@
   } */
 }
 @media (max-width: 768px) {
-  .pc-header {
-    display: none !important;
-  }
-  .mobile-header {
-    display: block;
-  }
   .cart-mobile-icon i {
     font-size: 13px;
     margin-left: 10px;
@@ -154,6 +144,14 @@
     width: 8%;
     margin: 0 7px;
   }
+
+     .pc-header {
+       display: none !important;
+     }
+
+    .mobile-header {
+      display: block;
+    }
   .login-center {
     padding: 20px 0;
   }
@@ -275,7 +273,7 @@ margin-bottom: 10px;
 height: 30vh;
 }
 .carousel-wrapper{
-  height: 120vh;
+  height: auto;
 }
 
 .foto-img{
@@ -299,6 +297,16 @@ height: 30vh;
 .cart-text h4{
   font-weight: 100 !important;
   font-size: 10px;
+}
+
+.featured-categories{
+  display: none;
+}
+
+.featured-categories-mobile{
+  display: flex;
+  background-color: var(--color-orange);
+  height: auto;
 }
 
 }
@@ -437,6 +445,18 @@ height: 30vh;
 
   .navbar-brand h1{
     font-size: 1.6rem;
+  }
+
+  .badge {
+    top: -10px;
+    /* padding: 5px; */
+    font-size: 7px;
+    top: -12px;
+    left: 8px;
+    /* right: -6px; */
+    border-radius: 100px;
+    padding: 3px 5px;
+    /* font-size: 9px; */
   }
 }
 

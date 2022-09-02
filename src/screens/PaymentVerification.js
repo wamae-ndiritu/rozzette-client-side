@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../Redux/Actions/OrderActions";
 import Message from "./../components/LoadingError/Error";
 import Loading from "./../components/LoadingError/Loading";
+import mpesa from "../Images/mpesa-log.jpg";
 import {
   verifyMpesaCode,
   makeOrderIsPaid,
@@ -12,11 +13,10 @@ import {
 import { ORDER_CREATE_RESET } from "../Redux/Constants/OrderConstants";
 
 const PaymentVericationScreen = ({ history }) => {
-
   const title = "Payment Verification";
-    useEffect(() => {
-      document.title = `Rozzette | ${title}`;
-    }, []);
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
 
   const [mpesaCode, setMpesaCode] = useState("");
   const dispatch = useDispatch();
@@ -99,46 +99,54 @@ const PaymentVericationScreen = ({ history }) => {
   return (
     <>
       <Header />
-      <div className="payment-container">
-        {loading ? (
-          <Loading />
-        ) : (
-          error && <Message variant="alert-danger">{error}</Message>
-        )}
-        <div className="payment-ver-cont">
-          <div className="ver-wrapper alert-success">
-            <div className="ver-title">
-              <h6>Verify Payment</h6>
-            </div>
-            <div className="ver-body">
-              <div className="ver-col-1">
-                <p>
-                  Enter the Mpesa Code received from Safaricom Mpesa for
-                  confirmation.
-                </p>
+      <div className="container mt-5 mb-4 d-flex justify-content-center">
+        <div className="col-md-6 col-lg-6 col-12 shadow-lg">
+          {loading ? (
+            <Loading />
+          ) : (
+            error && (
+              <div className="d-flex justify-content-center mt-3">
+                <Message variant="alert-danger" className="col-4">
+                  {error}
+                </Message>
               </div>
-              <div className="ver-col-2">
-                <div className="code-btn">MPESA CODE</div>
+            )
+          )}
+          <div className="text-center my-3 mpesa-page-title">
+            <h6>Verify Payment</h6>
+          </div>
+          <div className="row mb-4 mx-3">
+            <div className="col-6">
+              <p className="gray-para">
+                Enter the Mpesa Code received from Safaricom Mpesa for
+                confirmation.
+              </p>
+            </div>
+            <form className="col-6 mpesa-form">
+              <div className="mpesa-title">
+                <img src={mpesa} alt="mpesa"/>
+              </div>
+              <div className="mpesa-input">
+                <label>ENTER MPESA CODE</label>
                 <input
                   type="text"
                   placeholder="QEV5XPAKEX"
                   onChange={(e) => setMpesaCode(e.target.value)}
                 />
               </div>
-            </div>
-            <div className="btn-cont">
-              <button
-                type="submit"
-                className="verify-btn"
-                onClick={submitHandler}
-              >
-                Verify
-              </button>
-            </div>
+              <div className="mpesa-input">
+                <button
+                  type="submit"
+                  onClick={submitHandler}
+                  className="mpesa-btn"
+                >
+                  Verify
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <br />
       <Footer />
     </>
   );

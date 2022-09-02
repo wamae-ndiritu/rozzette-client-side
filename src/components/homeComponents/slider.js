@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 import banner1 from "../../Images/banner-1.jpg";
 import { data } from "../../data/exclusiveProducts";
 
@@ -79,7 +80,9 @@ const Slider = () => {
         </div>
         <div className="featured-products">
           <div className="shadow-lg mx-3 my-4 heading-bar">
-            <p className="text-center ">Exclusive Shopping</p>
+            <p className="text-center ">
+              Exclusive Shopping {$(window).innerWidth()}
+            </p>
           </div>
           <div className="row d-flex justify-content-center mx-5">
             {data.map((product) => {

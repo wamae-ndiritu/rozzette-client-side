@@ -53,7 +53,7 @@ const Login = ({ location, history }) => {
         {error && <Message variant="alert-danger">{error}</Message>}
         {loading && <Loading />}
         <form
-          className="Login col-md-8 col-lg-4 col-11"
+          className="Login col-md-6 col-lg-6 col-11"
           onSubmit={submitHandler}
         >
           <input
@@ -70,22 +70,31 @@ const Login = ({ location, history }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <i className="fa fa-eye fa-pass" onClick={toggleEye}></i>
+            <i
+              className={
+                isClicked
+                  ? `fa fa-eye fa-pass pass-check`
+                  : `fa fa-eye-slash fa-pass pass-check`
+              }
+              onClick={toggleEye}
+            ></i>
           </div>
           <button type="submit">Login</button>
-          <div className="d-flex .fle-row">
+          <div className="d-flex justify-content-center">
             <p>
               <Link
                 to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                className="red-link-cont px-2"
               >
-                Forgot password?
+                <span className="red-link">Forgot password?</span>
               </Link>
             </p>
             <p>
               <Link
                 to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                className="red-link-cont"
               >
-                Create Account
+                <span className="red-link">Create Account</span>
               </Link>
             </p>
           </div>

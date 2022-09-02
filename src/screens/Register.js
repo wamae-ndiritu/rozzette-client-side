@@ -12,6 +12,8 @@ const Register = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -27,13 +29,15 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    if (password === password1) {
+      dispatch(register(name, email, password));
+    }
   };
 
   const title = "Sign Up";
-    useEffect(() => {
-      document.title = `Rozzette | ${title}`;
-    }, []);
+  useEffect(() => {
+    document.title = `Rozzette | ${title}`;
+  }, []);
 
   return (
     <>
@@ -43,7 +47,7 @@ const Register = ({ location, history }) => {
         {loading && <Loading />}
 
         <form
-          className="Login col-md-8 col-lg-4 col-11"
+          className="Login col-md-6 col-lg-6 col-11"
           onSubmit={submitHandler}
         >
           <input
@@ -58,18 +62,38 @@ const Register = ({ location, history }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <div className="d-flex pass-input">
+            <input
+              type={isClicked ? "text" : "password"}
+              className="in-pass"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <i
+              className={
+                isClicked
+                  ? `fa fa-eye fa-pass pass-check`
+                  : `fa fa-eye-slash fa-pass pass-check`
+              }
+              onClick={() => setIsClicked(!isClicked)}
+            ></i>
+          </div>
           <input
             type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Confirm Password"
+            value={password1}
+            onChange={(e) => setPassword1(e.target.value)}
           />
 
           <button type="submit">Register</button>
           <div className="d-flex fle-row"></div>
           <p>
-            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-              I Have Account <strong>Login</strong>
+            <Link
+              to={redirect ? `/login?redirect=${redirect}` : "/login"}
+              className="red-link-cont"
+            >
+              I Have Account <strong className="red-link">Login</strong>
             </Link>
           </p>
         </form>

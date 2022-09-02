@@ -90,7 +90,7 @@ const SingleProduct = ({ history, match }) => {
   return (
     <>
       <Header />
-      <div className="container single-product">
+      <div className="container single-product mt-4">
         {loading ? (
           <Loading />
         ) : error ? (
@@ -102,17 +102,19 @@ const SingleProduct = ({ history, match }) => {
                 <div className="single-image" style={{ background: "#f3f3f3" }}>
                   <img src={product.image} alt={product.name} id="large-img" />
                 </div>
-                <div className="thumb" ref={myRef}>
-                  {product.image?.length > 1 &&
-                    product.image?.map((colorImage, index) => (
-                      <img
-                        src={colorImage}
-                        alt=""
-                        key={index}
-                        onClick={() => handleTab(colorImage, index)}
-                      />
-                    ))}
-                </div>
+                {product?.length > 0 && (
+                  <div className="thumb" ref={myRef}>
+                    {product.image?.length > 1 &&
+                      product.image?.map((colorImage, index) => (
+                        <img
+                          src={colorImage}
+                          alt=""
+                          key={index}
+                          onClick={() => handleTab(colorImage, index)}
+                        />
+                      ))}
+                  </div>
+                )}
                 <div className="filter-wrapper">
                   <div className="column-2">
                     <h4 className="my-4">Colors</h4>

@@ -80,11 +80,11 @@ const CategoryFilters = ({ categoryName, pageNumber }) => {
             <h5 className="filter-head">Price (KES) </h5>
             <div className="price-cont my-3">
               <div className="price-limits" style={{ marginRight: "15px" }}>
-                <p>MIN PRICE</p>
+                <p className="filter-head">min price</p>
                 <div className="price-space">{price[0]}</div>
               </div>
               <div className="price-limits">
-                <p>MAX PRICE</p>
+                <p className="filter-head">max price</p>
                 <div className="price-space">{price[1]}</div>
               </div>
             </div>

@@ -30,7 +30,7 @@ const Header = () => {
 
   $(window).scroll(function () {
     // console.log($(this).scrollTop());
-    if ($(this).scrollTop() > 250) {
+    if ($(this).scrollTop() > 150) {
       $("#top").addClass("sticky-header");
       $("#top").removeClass("mt-5");
     } else {
@@ -53,7 +53,11 @@ const Header = () => {
                   <>
                     <div className="col-3 d-flex align-items-center justify-content-center">
                       <Link className="navbar-brand" to="/">
-                        <h1>Rozzette</h1>
+                        {$(window).innerWidth() <= 330 ? (
+                          <h1 style={{ fontSize: "14px" }}>Rozzette</h1>
+                        ) : (
+                          <h1>Rozzette</h1>
+                        )}
                         {/* <img src={rozzetteLogo} alt="Rozzette logo" /> */}
                       </Link>
                     </div>
@@ -67,18 +71,11 @@ const Header = () => {
                             aria-haspopup="true"
                             aria-expanded="false"
                           >
-                            <i
-                              className="fas fa-user head-icons"
-                              style={{ fontSize: "24px" }}
-                            ></i>
+                            <i className="fas fa-user head-icons"></i>
                           </button>
                           <div className="dropdown-menu">
                             <Link className="dropdown-item" to="/profile">
-                              <i
-                                className="fa fa-user head-icons"
-                                style={{ fontSize: "24px" }}
-                              ></i>{" "}
-                              Profile
+                              <i className="fa fa-user head-icons"></i> Profile
                             </Link>
 
                             <Link
@@ -100,10 +97,7 @@ const Header = () => {
                             aria-haspopup="true"
                             aria-expanded="false"
                           >
-                            <i
-                              className="fas fa-user head-icons"
-                              style={{ fontSize: "24px" }}
-                            ></i>
+                            <i className="fas fa-user head-icons"></i>
                           </button>
                           <div className="dropdown-menu">
                             <Link className="dropdown-item" to="/login">
@@ -111,11 +105,8 @@ const Header = () => {
                             </Link>
 
                             <Link className="dropdown-item" to="/register">
-                              <i
-                                className="fa fa-user-plus head-icons"
-                                style={{ fontSize: "24px" }}
-                              ></i>{" "}
-                              Sigh Up
+                              <i className="fa fa-user-plus head-icons"></i>{" "}
+                              Sign Up
                             </Link>
                           </div>
                         </div>
@@ -128,7 +119,7 @@ const Header = () => {
                       >
                         <i
                           className="fa fa-cart-plus head-icons"
-                          style={{ fontSize: "1.75rem" }}
+                          // style={{ fontSize: "1.75rem" }}
                         ></i>
                         {cartItems.length > 0 && (
                           <span className="badge">{cartItems.length}</span>
@@ -136,14 +127,25 @@ const Header = () => {
                         <p className="px-2">Cart</p>
                       </Link>
                     </div>
-                    <div className="col-3 d-flex align-items-center justify-content-center">
-                      <button
-                        className="btn btn-search"
-                        onClick={() => setIsSearchHiden(!isSearchHidden)}
-                      >
-                        Search
-                      </button>
-                    </div>
+                    {$(window).innerWidth() <= 330 ? (
+                      <div className="col-3 d-flex align-items-center justify-content-center">
+                        <button
+                          className="btn btn-search"
+                          onClick={() => setIsSearchHiden(!isSearchHidden)}
+                        >
+                          <i className="fa fa-search"></i>
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="col-3 d-flex align-items-center justify-content-center">
+                        <button
+                          className="btn btn-search"
+                          onClick={() => setIsSearchHiden(!isSearchHidden)}
+                        >
+                          Search
+                        </button>
+                      </div>
+                    )}
                     {/* <SearchIcon style={{ color: "black" }} /> */}
                   </>
                 ) : (
@@ -174,13 +176,13 @@ const Header = () => {
           {/* PC HEADER */}
           <div className="pc-header">
             <div className="row">
-              <div className="col-md-2 col-4 d-flex align-items-center">
+              <div className="col-md-3 col-4 d-flex align-items-center">
                 <Link className="navbar-brand" to="/">
                   <h1>Rozzette</h1>
                   {/* <img src={rozzetteLogo} alt="Rozzette logo" /> */}
                 </Link>
               </div>
-              <div className="col-md-6 col-8 d-flex align-items-center">
+              <div className="col-md-5 col-8 d-flex align-items-center">
                 <form onSubmit={submitHandler} className="input-group">
                   <input
                     type="search"
@@ -193,7 +195,7 @@ const Header = () => {
                   </button>
                 </form>
               </div>
-              <div className="col-md-4 d-flex align-items-center justify-content-end Login-Register">
+              <div className="col-md-4 d-flex align-items-center justify-content-center Login-Register">
                 {userInfo ? (
                   <div className="btn-group">
                     <button
@@ -207,11 +209,7 @@ const Header = () => {
                     </button>
                     <div className="dropdown-menu">
                       <Link className="dropdown-item" to="/profile">
-                        <i
-                          className="fa fa-user head-icons"
-                          style={{ fontSize: "24px" }}
-                        ></i>{" "}
-                        Profile
+                        <i className="fa fa-user head-icons"></i> Profile
                       </Link>
 
                       <Link
@@ -224,27 +222,24 @@ const Header = () => {
                     </div>
                   </div>
                 ) : (
-                  <>
+                  <div className="d-flex">
                     <Link to="/register" className="signing-container">
                       <i className="fa fa-user-plus head-icons"></i>
                       <p className="px-2 header-titles">Sign Up</p>
                     </Link>
                     <Link to="/login" className="signing-container">
-                      <i
-                        className="fa fa-user head-icons"
-                        style={{ fontSize: "24px" }}
-                      ></i>
+                      <i className="fa fa-user head-icons"></i>
                       <p className="px-2 header-titles">Login</p>
                     </Link>
-                  </>
+                  </div>
                 )}
                 <Link
                   to="/cart"
-                  className="d-flex align-items-center justify-content-center"
+                  className="d-flex align-items-center justify-content-center signing-container"
                 >
                   <i
                     className="fa fa-cart-plus head-icons"
-                    style={{ fontSize: "1.75rem" }}
+                    // style={{ fontSize: "1.75rem" }}
                   ></i>
                   {cartItems.length > 0 && (
                     <span className="badge">{cartItems.length}</span>
